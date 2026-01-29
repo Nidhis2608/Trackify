@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trackify/theme/theme_provider.dart';
+
+import 'app/app.dart';
+import 'config/env.dart';
+import 'config/env_resolver.dart';
+
+late final Env appEnv;
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  appEnv = EnvResolver.resolve();
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
+      child: App(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -9,9 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Trackify',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: Text('Flutter Demo Home Page'),
+      home: Center(child: Text('Trackify')),
     );
   }
 }
