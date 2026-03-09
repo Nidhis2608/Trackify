@@ -16,7 +16,7 @@ class App extends StatelessWidget {
           theme: AppTheme.light(),
           darkTheme: AppTheme.dark(),
           themeMode: theme.themeMode,
-          home: Home(),
+          home: const Home(),
         );
       },
     );
@@ -28,10 +28,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<ThemeProvider>();
+    final theme = context.watch<ThemeProvider>();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trackify'),
+        title: const Text('Trackify'),
         actions: [
           IconButton(
             onPressed: theme.toggleTheme,
@@ -39,7 +40,14 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(child: Text('Theme Toggle')),
+      body: Center(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: const Text('Theme Toggle Working 🎉'),
+          ),
+        ),
+      ),
     );
   }
 }

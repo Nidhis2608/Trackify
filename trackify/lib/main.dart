@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:trackify/theme/theme_provider.dart';
 
 import 'app/app.dart';
@@ -14,20 +14,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
-      child: App(),
+      child: ShadcnApp(home: App()),
     ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Trackify',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: Center(child: Text('Trackify')),
-    );
-  }
 }
